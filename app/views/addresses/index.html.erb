@@ -1,0 +1,14 @@
+<% @addresses.each do |add|%>
+  <p>
+  <%= add.flat_no %><br />
+  <%= add.location %><br />
+  <%= add.city %><br />
+  <%= add.landmark %><br />
+  <%= add.address_type %><br />
+  <%= add.flat_no %>
+  <%= link_to 'edit', edit_address_path(@user,add) %>
+  </p>
+<% end %>
+<%= link_to 'Go to User profile', profile_path %>
+<br/>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

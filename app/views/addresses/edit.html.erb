@@ -1,0 +1,15 @@
+<%= form_for @address do |add|%>
+	<%= add.label :location %><br />
+  <%= add.text_area :location %><br />
+ 	<%= add.label :flat_no %><br />
+  <%= add.text_field :flat_no %><br />
+  <%= add.label :city %><br />
+  <%= add.text_field :city %><br />
+  <%= add.label :landmark %><br />
+  <%= add.text_field :landmark %><br />
+  <%= add.label :address_type %><sub>(not mandatory)</sub><br />	
+  <%= add.text_field :address_type %><br />
+  <%= add.submit 'Edit address'%>
+<% end %>
+<%= link_to 'Go to User profile', profile_path %>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

@@ -1,0 +1,10 @@
+<%= @user.name %><br />
+<%= current_user.email %><br />
+<%= current_user.contact %><br />
+<%= current_user.city %><br />
+<%= current_user.role %><br />
+<%= link_to 'Create new Address', new_address_path(@user) %>||
+<%= link_to 'Show all Address',  addresses_path(@user) %>
+
+<br />
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
