@@ -1,8 +1,13 @@
-<%= @user.name %><br />
+<%= current_user.name %><br />
 <%= current_user.email %><br />
 <%= current_user.contact %><br />
 <%= current_user.city %><br />
-<%= current_user.role %><br />
+<%= current_user.roles.first.user_type %><br />
+<% if current_user.roles.first.user_type == "restaurant"%>
+	<% current_user.restaurants.map{|obj|obj.name}.each do |restaurant_name|%>
+		<%= restaurant_name %>
+	<% end %>
+<% end %><br />
 <%= link_to 'Create new Address', new_address_path(@user) %>||
 <%= link_to 'Show all Address',  addresses_path(@user) %>
 

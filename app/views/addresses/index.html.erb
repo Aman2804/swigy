@@ -6,7 +6,7 @@
   <%= add.landmark %><br />
   <%= add.address_type %><br />
   <%= add.flat_no %>
-  <%= link_to 'edit', edit_address_path(@user,add) %>
+  <%= link_to 'edit', edit_address_path(current_user,add) %>
   </p>
 <% end %>
 <%= link_to 'Go to User profile', profile_path %>

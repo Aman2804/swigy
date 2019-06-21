@@ -8,7 +8,8 @@ class User < ApplicationRecord
 	validates :gender,											 	inclusion: {in:["Male","Female"],message: " should select"}
 	has_many :addresses, as: :addressable
   has_many :restaurants
-  has_one :favourite
-  has_one :cart
-  has_many :orders
+  has_one :favourite, dependent: :destroy
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :roles, dependent: :destroy
 end

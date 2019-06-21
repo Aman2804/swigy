@@ -131,12 +131,15 @@ ActiveRecord::Schema.define(version: 2019_06_20_143942) do
   create_table "restaurants", force: :cascade do |t|
     t.string "designation"
     t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.integer "user_id"
+    t.string "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_roles_on_user_id"
@@ -147,7 +150,6 @@ ActiveRecord::Schema.define(version: 2019_06_20_143942) do
     t.integer "contact"
     t.string "gender"
     t.string "city"
-    t.string "role"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

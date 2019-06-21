@@ -8,10 +8,12 @@ Rails.application.routes.draw do
       
   devise_scope :user do
       get 'profile', to: 'users/registrations#show'
-      resources :restaurants
+      # resources :restaurants
   end
   scope path: 'users/:users_id' do
   	resources :addresses, except: :show
+    resources :restaurants
+    # resources :restaurants, except: :show
 	end
  # resources :users_id do
  #  	resources :addresses, except: :show

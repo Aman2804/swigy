@@ -1,16 +1,14 @@
 class AddressesController < ApplicationController
-  before_action :addressable_data
   def index
-    @addresses = @user.addresses
+    @addresses = current_user.addresses
   end
 
   def new
-    @address = @user.addresses.new
+    @address = current_user.addresses.new
   end
   
   def create
-    binding.pry
-    @address = @user.addresses.new(address_permited_params)
+    @address = current_user.addresses.new(address_permited_params)
     if @address.save
       redirect_to addresses_path
     else
@@ -31,17 +29,6 @@ class AddressesController < ApplicationController
   end
 
   private
-
-  def addressable_data
-    @address_type_id = request.env["REQUEST_PATH"].split('/') 
-    @addressable_type = @address_type_id[1].capitalize.singularize#.constantize
-    # @user = User.find([@address_type_id[2].to_i])
-    if  @addressable_type == "User"
-    @user = current_user
-    elsif @addressable_type == "Dashboard"
-      @user = current_dashboard
-    end
-  end
 
   def address_permited_params
     params.require(:address).permit(:flat_no, :location, :city, :landmark, :address_type)

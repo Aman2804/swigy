@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :Role %><br />
-    <%= f.select(:role, options_for_select([['customer', 'user'], ['Distributor', 'restaurant']],'user')) %>
+    <%= select_tag(:user_type, options_for_select([['customer', 'user'], ['Distributor', 'restaurant']],'user')) %>
 
   </div>
 

@@ -12,9 +12,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    binding.pry
     super
-    binding.pry
+    @role = current_user.roles.build
+    @role.user_type = params[:user_type]
+    @role.save
+    # if current_user.roles.first.user_type == "restaurant"
+    #   new_restaurant_path
+    # else
+    #   profile_path
+    # end
   end
 
   # GET /resource/edit
@@ -63,11 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    if current_user[:role] == "restaurant"
-      new_restaurant_path
-    else
-      profile_path
-    end
+    new_restaurant_path(current_user)
   end
 
   # The path used after sign up for inactive accounts.

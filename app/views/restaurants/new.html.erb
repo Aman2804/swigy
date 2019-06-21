@@ -1,4 +1,7 @@
 <%= form_for @restaurant do |restaurant|%>
-	<%= restaurant.string :name %>
-	<%= restaurant.string :designation%>
+	<%= restaurant.label :Name %>
+	<%= restaurant.text_field :name %><br />
+	<%= restaurant.label :designation%>
+	<%= restaurant.text_field :designation%><br />
+	<%= restaurant.submit "submit"%>
 <% end %>
