@@ -8,16 +8,27 @@ class RestaurantsController < ApplicationController
 	end
 	def create
 		@restaurant = current_user.restaurants.build(restaurants_params)
-		# binding.pry
 		@restaurant.save
-		# if @restaurant.save
-		# 	redirect_to profile_path
-		# else
+		if @restaurant.save
+			redirect_to restaurants_path
+		else
 			render 'new'
-		# end
+		end
 	end
 	def edit
-		@restaurant = current_user.restaurants
+		@restaurant = current_user.restaurants.find(params[:id])
+	end
+	def show
+		@restaurant = current_user.restaurants.find(params[:id])
+		@items = Item.all
+	end
+	def update
+		current_user.restaurants.find(params[:id]).update(restaurants_params)
+		redirect_to restaurants_path
+	end
+	def destroy
+		current_user.restaurants.find(params[:id]).destroy
+		redirect_to restaurants_path
 	end
 	private
 	def restaurants_params

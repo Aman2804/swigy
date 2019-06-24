@@ -1,0 +1,6 @@
+<h5>Set the price</h5>
+	<%= form_for @restaurant_item do |item|%>
+		<%= item.label :Price%>
+		<%= item.text_field :price%>
+		<%= item.submit 'Add'%>
+	<% end %>

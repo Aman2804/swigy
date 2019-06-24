@@ -1,0 +1,11 @@
+<%= form_for @item do |item| %>
+	<%= item.label :Item_name %>
+	<%= item.text_field :name %><br />
+	<%= item.label :Category %>
+	<%= item.text_field :category %><br />
+	<%= item.label :Item_type %>
+	<%= item.select(:type_of_dish, options_for_select([['Veg','veg'],['Non-veg','non-veg']], @item.type_of_dish))%><br />
+	<%= item.submit 'Make the change'%>
+<% end %>
+<%= link_to 'Go to Profile', profile_path%><br />
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

@@ -1,5 +1,5 @@
 <% @restaurants.each do |restaurant|%>
-  <%= restaurant.user_type%>
-  <%= link_to 'edit', edit_restaurant_path%>
+  <%= restaurant.name%>
+  	<%= link_to 'edit', edit_restaurant_path(current_user, restaurant)%><br />	
 <% end %>
 <%= link_to 'User Sign out', destroy_user_session_path, method: :delete %>

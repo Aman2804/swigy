@@ -2,6 +2,6 @@
 	<%= restaurant.label :Restaurant_Name %>
 	<%= restaurant.text_field :name %><br />
 	<%= restaurant.label :designation%>
-	<%= restaurant.select(:designation, options_for_select([['Owner', 'owner'], ['Manager', 'manager']],'owner')) %><br />
+	<%= restaurant.select(:designation, options_for_select([['Owner', 'owner'], ['Manager', 'manager']],@restaurant.designation)) %><br />
 	<%= restaurant.submit "submit" %>
 <% end %>

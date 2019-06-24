@@ -13,9 +13,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    @role = current_user.roles.build
-    @role.user_type = params[:user_type]
-    @role.save
     # if current_user.roles.first.user_type == "restaurant"
     #   new_restaurant_path
     # else
@@ -69,12 +66,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    if current_user.roles.first.user_type == "delivery patner"
-      new_delivery_path
-    elsif current_user.roles.first.user_type == "restaurant"
+    @role = current_user.roles.build
+    @role.user_type = params[:user_type]
+    @role.save
+    if params[:user_type] == "delivery patner"
+      new_delivery_path(current_user)
+    elsif params[:user_type] == "restaurant"
       new_restaurant_path(current_user)
     else
       profile_path
+    end
   end
 
   # The path used after sign up for inactive accounts.
