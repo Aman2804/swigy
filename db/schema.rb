@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_143942) do
+ActiveRecord::Schema.define(version: 2019_06_23_113902) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "flat_no"
@@ -42,11 +42,6 @@ ActiveRecord::Schema.define(version: 2019_06_20_143942) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "carts_restaurant_items", id: false, force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "restaurant_item_id"
-  end
-
   create_table "coupon_types", force: :cascade do |t|
     t.integer "coupon_id"
     t.datetime "created_at", null: false
@@ -63,13 +58,12 @@ ActiveRecord::Schema.define(version: 2019_06_20_143942) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "favourite_restaurants", force: :cascade do |t|
-    t.integer "restaurant_id"
-    t.integer "favourite_id"
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "vehicle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["favourite_id"], name: "index_favourite_restaurants_on_favourite_id"
-    t.index ["restaurant_id"], name: "index_favourite_restaurants_on_restaurant_id"
+    t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
 
   create_table "favourites", force: :cascade do |t|

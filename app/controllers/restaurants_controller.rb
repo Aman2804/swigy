@@ -1,5 +1,8 @@
 class RestaurantsController < ApplicationController
 	before_action :check_user_type
+	def index
+		@restaurants = current_user.restaurants
+	end
 	def new
 		@restaurant = current_user.restaurants.build
 	end
@@ -12,6 +15,9 @@ class RestaurantsController < ApplicationController
 		# else
 			render 'new'
 		# end
+	end
+	def edit
+		@restaurant = current_user.restaurants
 	end
 	private
 	def restaurants_params

@@ -1,7 +1,7 @@
 <%= form_for @restaurant do |restaurant|%>
-	<%= restaurant.label :Name %>
+	<%= restaurant.label :Restaurant_Name %>
 	<%= restaurant.text_field :name %><br />
 	<%= restaurant.label :designation%>
-	<%= restaurant.text_field :designation%><br />
+	<%= restaurant.select(:designation, options_for_select([['Owner', 'owner'], ['Manager', 'manager']],'owner')) %><br />
 	<%= restaurant.submit "submit"%>
 <% end %>

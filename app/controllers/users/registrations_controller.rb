@@ -69,7 +69,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    new_restaurant_path(current_user)
+    if current_user.roles.first.user_type == "delivery patner"
+      new_delivery_path
+    elsif current_user.roles.first.user_type == "restaurant"
+      new_restaurant_path(current_user)
+    else
+      profile_path
   end
 
   # The path used after sign up for inactive accounts.

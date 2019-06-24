@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   scope path: 'users/:users_id' do
   	resources :addresses, except: :show
     resources :restaurants
+    resources :roles
+    resources :deliveries
     # resources :restaurants, except: :show
 	end
  # resources :users_id do
