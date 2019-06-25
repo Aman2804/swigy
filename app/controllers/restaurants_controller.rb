@@ -32,7 +32,7 @@ class RestaurantsController < ApplicationController
 	end
 	private
 	def restaurants_params
-		params.require(:restaurant).permit(:designation, :item_id)		
+		params.require(:restaurant).permit(:designation, :item_id,:name)		
 	end
 	def check_user_type
 		unless current_user.roles.first.user_type == "restaurant"

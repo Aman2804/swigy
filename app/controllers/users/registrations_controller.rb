@@ -66,9 +66,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    @role = current_user.roles.build
-    @role.user_type = params[:user_type]
-    @role.save
     if params[:user_type] == "delivery patner"
       new_delivery_path(current_user)
     elsif params[:user_type] == "restaurant"

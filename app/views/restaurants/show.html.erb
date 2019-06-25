@@ -12,10 +12,10 @@
 				Price <%= text_field_tag :price %>
 				<%= hidden_field_tag 'item',  "#{item.id}" %>
 				<%= hidden_field_tag 'restaurant_id', "#{@restaurant.id}" %>
-				<%= button_tag :Add_to_menu, id: "button" %>
+				<%= button_tag "Add to menu", id: "button" %>
 			<% end %>
 		<% else %>
-			<%= link_to 'Remove Item',restaurant_item_path(@restaurant,item), method: :delete %>
+			<%= button_to 'Remove Item',restaurant_item_path(@restaurant,item), method: :delete %>
 		<% end %>
 	<% end %><br />
 <% end %> 
