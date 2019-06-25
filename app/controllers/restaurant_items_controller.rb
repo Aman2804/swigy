@@ -1,17 +1,21 @@
 class RestaurantItemsController < ApplicationController
 	def new
-		binding.pry
 		@restaurant = Restaurant.find(params[:restaurants_id])
 		@restaurant_item = @restaurant.restaurant_items.build
 	end
+
 	def create
 		@restaurant = Restaurant.find(params[:restaurants_id])
-		binding.pry
-		@restaurant_item = @restaurant.restaurant_items.create(restaurant_items_params)
-		binding.pry
+		@restaurant_item = @restaurant.restaurant_items.build
+		@restaurant_item[:item_id] = params[:item]
+		@restaurant_item[:price] = params[:price]
+		@restaurant_item.save
+		redirect_to restaurant_path(current_user,@restaurant)
 	end
-	private
-	def restaurant_items_params
-		params.require(:restaurant_item).permit(:price,:items_id)
+	def destroy
+		@restaurant = Restaurant.find(params[:restaurants_id])
+		@restaurant.restaurant_items.select{|obj| obj.item_id == params[:id].to_i }.first.destroy
+		redirect_to restaurant_path(current_user,@restaurant)
 	end
+
 end

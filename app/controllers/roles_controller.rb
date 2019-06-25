@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
-	before_action :find_user_role, only: [:edit,:update,:destroy]
 	before_action :validate_to_access
+	before_action :find_user_role, only: [:edit,:update,:destroy]
 	def index
 		@roles = current_user.roles
 	end
@@ -46,6 +46,7 @@ class RolesController < ApplicationController
 
 	def validate_to_access
 		unless user_signed_in?
+			redirect_to root_path			
 		end
 	end
 end

@@ -19,7 +19,7 @@ class RestaurantsController < ApplicationController
 		@restaurant = current_user.restaurants.find(params[:id])
 	end
 	def show
-		@restaurant = current_user.restaurants.find(params[:id])
+		@restaurant = Restaurant.find(params[:id])
 		@items = Item.all
 	end
 	def update
@@ -32,7 +32,7 @@ class RestaurantsController < ApplicationController
 	end
 	private
 	def restaurants_params
-		params.require(:restaurant).permit(:designation,:name)		
+		params.require(:restaurant).permit(:designation, :item_id)		
 	end
 	def check_user_type
 		unless current_user.roles.first.user_type == "restaurant"

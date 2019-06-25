@@ -4,14 +4,7 @@
 	<%= item.type_of_dish %>
 	<% if current_user.roles.first.user_type == "admin" %>
 		<%= link_to 'edit', edit_item_path(item) %>
-	<% elsif current_user.roles.first.user_type == "restaurant"%>
-		<%# link_to 'Add to menu', new_restaurant_item_path(current_user.restaurants.first) %>
-		<%= form_for @restaurant_item, :remote=>true do |item_data|%>
-			<%= item_data.hidden_field 'item' %>
-			Price <%= item_data.text_field :price %>	
-			<%= item_data.submit 'Add to menu'%>
 		<% end %>
-		<%# hidden_field_tag 'item' %>
-	<% end %>	
 	<br />
 <% end %>
+<%= link_to 'Add Item', new_item_path %>
