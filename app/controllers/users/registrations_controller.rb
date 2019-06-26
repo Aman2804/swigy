@@ -31,6 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @restaurant = Restaurant.find(params[:restaurant_id])
     @restaurant_items = RestaurantItem.all.map{|restaurant_item| restaurant_item.item_id if restaurant_item.restaurant_id == @restaurant.id}
     @items = Item.find(@restaurant_items)
+    
   end
   def restaurants_list
     @restaurants = Restaurant.all

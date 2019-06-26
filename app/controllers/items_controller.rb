@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 		params.require(:item).permit(:name,:category,:type_of_dish)
 	end
 	def check_user_role
-		if current_user.roles.select{|role| role.user_type == "restaurant"}.empty? ||  current_user.roles.first.user_type != "admin"
+		unless current_user.roles.select{|role| role.user_type == "restaurant"}.empty? ||  current_user.roles.first.user_type != "admin"
 			redirect_to profile_path
 		end
 	end

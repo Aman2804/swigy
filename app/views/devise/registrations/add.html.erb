@@ -3,16 +3,18 @@
 	<%= item.name %>
 	<%= item.category %>
 	<%= item.type_of_dish %>
-		<%# if @restaurant.restaurant_items.select{|obj| obj.item_id == item.id }.empty?%>
+		<% if current_user.cart.cart_items.select{|obj| obj.restaurant_item_id == (@restaurant.restaurant_items.select{|obj1| obj1.item_id == item.id}).first.id }.empty? %>
 			<%= form_tag cart_items_path, method: :post do %>
 				No of Item <%= text_field_tag :num_of_item %>
-				<%= hidden_field_tag 'item',  "#{item.id}" %>
+				<%= hidden_field_tag 'item_id',  "#{item.id}" %>
 				<%= hidden_field_tag 'restaurant_id', "#{@restaurant.id}" %>
 				<%= button_tag "Add", id: "button" %>
 			<% end %>
-		<%# else %>
-			<%# button_to 'Remove Item',restaurant_item_path(@restaurant,item), method: :delete %>
-		<%# end %>
+		<% else %>
+			<br />
+			Quantity:<%= current_user.cart.cart_items.select{|obj| obj.restaurant_item_id == (@restaurant.restaurant_items.select{|obj1| obj1.item_id == item.id}).first.id }.first.num_of_item %>
+			<%= button_to 'Remove Item',cart_item_path(@restaurant,item), method: :delete %>
+		<% end %>
 	<br />
 <% end %> 
 <script>
