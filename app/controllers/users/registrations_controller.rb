@@ -26,7 +26,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   #profile
   def show
-    @user = current_user
+  end
+  def add
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant_items = RestaurantItem.all.map{|restaurant_item| restaurant_item.item_id if restaurant_item.restaurant_id == @restaurant.id}
+    @items = Item.find(@restaurant_items)
+  end
+  def restaurants_list
+    @restaurants = Restaurant.all
   end
   # PUT /resource
   # def update
@@ -51,12 +58,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute,:name,:contact,:gender,:city,:role])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute,:name,:contact,:gender,:city,:user_type])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute,:name,:contact,:gender,:city,:role])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute,:name,:contact,:gender,:city,:user_type])
   end
   def session_check
     unless user_signed_in?

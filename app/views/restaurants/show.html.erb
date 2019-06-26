@@ -3,10 +3,10 @@
 	<%= item.name %>
 	<%= item.category %>
 	<%= item.type_of_dish %>
-		<%# binding.pry %>
 	<% if current_user.roles.first.user_type == "admin" %>
 		<%= link_to 'edit', edit_item_path(item) %>
-	<% elsif current_user.roles.first.user_type == "restaurant" %>
+	<% end %>
+	<% unless current_user.roles.select{|role| role.user_type == "restaurant"}.empty? %>
 		<% if @restaurant.restaurant_items.select{|obj| obj.item_id == item.id }.empty?%>
 			<%= form_tag restaurant_items_path(@restaurant), method: :post do %>
 				Price <%= text_field_tag :price %>
@@ -23,7 +23,6 @@
 <script>
 	$(document).ready(function() {
 		$("#button").click(function(){
-	  debugger
 	    var price = $('#price').val();
 	    var item_id = $('#item_id').val();
 	    var restaurant  = $('#restaurant').val();

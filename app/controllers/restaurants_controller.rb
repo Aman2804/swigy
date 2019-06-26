@@ -35,8 +35,8 @@ class RestaurantsController < ApplicationController
 		params.require(:restaurant).permit(:designation, :item_id,:name)		
 	end
 	def check_user_type
-		unless current_user.roles.first.user_type == "restaurant"
+		if current_user.roles.select{|role| role.user_type == "restaurant"}.empty?
 			redirect_to profile_path
-		end	
+		end
 	end
 end
