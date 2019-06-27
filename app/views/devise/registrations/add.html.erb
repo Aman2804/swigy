@@ -7,27 +7,38 @@
 			<%= form_tag cart_items_path, method: :post do %>
 				No of Item <%= text_field_tag :num_of_item %>
 				<%= hidden_field_tag 'item_id',  "#{item.id}" %>
+				<%= hidden_field_tag 'token',  "1" %>
 				<%= hidden_field_tag 'restaurant_id', "#{@restaurant.id}" %>
 				<%= button_tag "Add", id: "button" %>
 			<% end %>
 		<% else %>
 			<br />
 			Quantity:<%= current_user.cart.cart_items.select{|obj| obj.restaurant_item_id == (@restaurant.restaurant_items.select{|obj1| obj1.item_id == item.id}).first.id }.first.num_of_item %>
-			<%= button_to 'Remove Item',cart_item_path(@restaurant,item), method: :delete %>
+			<% cart_item_id = current_user.cart.cart_items.select{|obj| obj.restaurant_item_id == (@restaurant.restaurant_items.select{|obj1| obj1.item_id == item.id}).first.id }.first.id%>
+			<%= form_tag cart_item_path(cart_item_id), method: :delete do %>
+				<%= hidden_field_tag 'token',  "2" %>
+				<%= hidden_field_tag :cart_id %>
+				<%= hidden_field_tag :restaurant_id, "#{@restaurant.id}" %>
+				<%= hidden_field_tag :id, "#{cart_item_id}"%>
+				<%= button_tag "Remove Item", id: "button" %>
+			<% end %>
 		<% end %>
 	<br />
-<% end %> 
+<% end %>
+<% unless current_user.cart.cart_items.all.empty?%>
+	<%= link_to "Go to cart", carts_path(current_user)%> 
+<% end %>
 <script>
 	$(document).ready(function() {
 		$("#button").click(function(){
 	  debugger
-	    var restaurant_id = $('#restaurant_id').val();
-	    var item_id = $('#item_id').val();
-	    var num_of_item = $('#num_of_item').val();
+	    var token = $('#token').val();
+	    var id = $('#id').val();
+	    var id = $('#restaurant_id').val();
 		  $.ajax({
-		   	url: '/cart_items',
-		    type: "POST",
-		    data: {restaurant_id: restaurant_id, item_id: item_id, num_of_item: num_of_item},
+		   	url: (token == "1")?'/cart_items':'/cart_items/'+id,
+		    type: (token == "1")?"POST":"DELETE",
+		    data: {restaurant_id: restaurant_id, item_id: item_id},
 		    success: function(data) {
 		      alert('successfully');
 		     }

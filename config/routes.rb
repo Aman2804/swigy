@@ -17,10 +17,15 @@ Rails.application.routes.draw do
     resources :roles
     resources :deliveries
     resources :carts
+    resources :orders
 	end
+  scope path:'oders/:orders_id' do 
+      resources :payments
+  end
   scope path:'restaurants/:restaurants_id' do 
       resources :restaurant_items
   end
     resources :cart_items
     resources :items
+
 end

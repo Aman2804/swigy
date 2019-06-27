@@ -1,0 +1,6 @@
+<h3>
+	<%= Restaurant.find(@current_order.restaurant_id).name %>
+</h3>
+<% @order_items.each do |order_item|%>
+	<%= order_item.restaurant_item_id%>
+<% end %>
