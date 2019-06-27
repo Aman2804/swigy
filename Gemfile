@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 #gem for jquery
 gem "jquery-rails"
 gem 'jquery-validation-rails'
+gem 'rails_admin', '~> 2.0.0.beta'
  # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
