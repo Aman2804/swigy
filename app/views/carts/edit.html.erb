@@ -1,0 +1,17 @@
+<% @cart_items.each do |cart_item|%>
+  <% restaurent_item = RestaurantItem.find(cart_item.restaurant_item_id)%>
+  <h3>
+    Restaurant:<%= Restaurant.find(restaurent_item.restaurant_id).name%>
+  </h3>
+  <h4>
+    <% item = Item.find(restaurent_item.item_id) %>
+    Name:<%= item.name%><br/>
+    Category:<%= item.category %><br/>
+    Type:<%= item.type_of_dish %><br/>
+    price:<%= restaurent_item.price %><br/>
+    <%= form_for cart_item do |item| %>
+      Quantity:<%= cart_item.text_field "#{cart_item.num_of_item}"%>
+    <%= cart_item.submit "Make Change" %>
+    <% end %>
+  </h4>
+<% end %>
