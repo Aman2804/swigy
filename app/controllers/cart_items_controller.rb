@@ -10,9 +10,10 @@ class CartItemsController < ApplicationController
 		@cart_item = CartItem.find(params[:id]).destroy
 		@restaurant = RestaurantItem.find(@cart_item.restaurant_item_id).restaurant_id
 		@cart_item.destroy
-	end
 		respond_to do |format|
 			format.js
 			format.html {redirect_to add_path(restaurant_id: @restaurant)}
+	    end
 	end
+		
 end

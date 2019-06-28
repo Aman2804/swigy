@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 	def index
+		# @orders = Order.where(restaurant_id: params[:restaurant_id]).includes(:order_items)
 		@restaurant = Restaurant.find(params[:restaurant_id])
 		@orders = Order.all.select{|order| order.restaurant_id == @restaurant.id}
 		@order_items = @orders.map{|obj|p obj.id}.map{|order_id| OrderItem.all.select{|order_item| order_item.order_id == order_id }}.flatten 
@@ -15,7 +16,6 @@ class OrdersController < ApplicationController
 	def update
 		@order = Order.find(params[:id])
 		@order.status = params[:value]
-		binding.pry
 		@user = params[:users_id]
 		@order.update(params.permit(:status))
 		redirect_to orders_path(params[:users_id],restaurant_id: @order.restaurant_id)
@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
 	def show
 		@current_order = Order.find(params[:id])
 		@order_items = @current_order.order_items.all
+		@items = @order_items.map{|order_item| Item.find(RestaurantItem.find(order_item.restaurant_item_id).item_id) }
 	end
 	private
 	def order_params

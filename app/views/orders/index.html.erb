@@ -1,5 +1,5 @@
 <%@orders.length.times do |position|%>
-<% @order_items.each do |order_item| %>
+<% @order_items.each do |order_item| %>	
 	Item <%= Item.find(RestaurantItem.find(@order_items.first.restaurant_item_id).item_id).name%><br/>
 	Quantity:<%= order_item.quantity%>
 	<br />

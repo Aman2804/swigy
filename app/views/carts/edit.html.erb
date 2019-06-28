@@ -9,9 +9,11 @@
     Category:<%= item.category %><br/>
     Type:<%= item.type_of_dish %><br/>
     price:<%= restaurent_item.price %><br/>
-    <%= form_for cart_item do |item| %>
-      Quantity:<%= cart_item.text_field "#{cart_item.num_of_item}"%>
-    <%= cart_item.submit "Make Change" %>
+    <%# binding.pry  %>
+    <%= form_tag cart_path(current_user),method: :patch do |item| %>
+      Quantity:<%= text_field_tag "item", "#{cart_item.num_of_item}"%>
+      <%= hidden_field_tag "cart_item_id", "#{cart_item.id}"%>
+      <%= submit_tag "Make Change" %>
     <% end %>
   </h4>
 <% end %>
